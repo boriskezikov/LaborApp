@@ -20,7 +20,7 @@ import java.math.BigInteger;
 public class AssignmentService {
 
     private final EmployeeRepository employeeRepository;
-    private TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
 
 
     public void assign(BigInteger employeeId, BigInteger taskId) {

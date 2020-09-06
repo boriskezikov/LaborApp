@@ -1,4 +1,4 @@
-package com.force.labor.service;
+package com.force.labor.service.test;
 
 import com.force.labor.domain.Employee;
 import com.force.labor.domain.Grade;
@@ -36,14 +36,14 @@ public class TestDataHelper {
         return taskRepository.saveAll(tasks);
     }
 
-    private List<Task> generateRandomTaskNumber(int limit) {
+    public List<Task> generateRandomTaskNumber(int limit) {
         return Stream.generate(this::getRandomTask)
                 .limit(TestHelper.getRandomInt(1, limit))
                 .collect(toList());
 
     }
 
-    private Employee getRandomEmployee() {
+    public Employee getRandomEmployee() {
         Grade grade = TestHelper.getRandomGrade();
         int salary;
         if (grade.equals(Grade.JUNIOR)) {
@@ -62,7 +62,7 @@ public class TestDataHelper {
                 .build();
     }
 
-    private Task getRandomTask() {
+    public Task getRandomTask() {
         var now = LocalDateTime.now(Clock.systemUTC());
         return Task.builder()
                 .created(now)

@@ -25,6 +25,4 @@ public class ExceptionInterceptor {
     protected ErrorDTO handleApiException(EntityNotFoundException ex) {
         return new ErrorDTO(404, ex.getMessage());
     }
-
-
 }

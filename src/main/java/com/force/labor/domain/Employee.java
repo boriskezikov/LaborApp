@@ -15,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import java.math.BigInteger;
@@ -49,7 +50,8 @@ public class Employee {
     @Column(nullable = false)
     private Integer salaryPerHour;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "tasks_id", nullable = false)
     private List<Task> tasks;
 
 }

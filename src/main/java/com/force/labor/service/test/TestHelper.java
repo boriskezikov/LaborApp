@@ -1,4 +1,4 @@
-package com.force.labor.service;
+package com.force.labor.service.test;
 
 
 import com.force.labor.domain.Grade;
