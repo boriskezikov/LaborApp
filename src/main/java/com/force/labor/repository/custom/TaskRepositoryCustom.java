@@ -60,7 +60,7 @@ public class TaskRepositoryCustom {
                 .ifPresent(option -> predicates.add(criteriaBuilder.lessThan(root.get("taskCost"), option)));
         ofNullable(sort)
                 .ifPresent(sortingStrategy -> {
-                    if (Arrays.stream(FindTasksDTO.class.getFields())
+                    if (Arrays.stream(FindTasksDTO.TCriteria.class.getDeclaredFields())
                             .map(Field::getName)
                             .collect(Collectors.toList()).contains(sort.getSortBy())) {
                         if (sort.getType().equals(SortOrder.ASCENDING)) {

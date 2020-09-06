@@ -57,7 +57,7 @@ public class EmployeeRepositoryCustom {
 
         ofNullable(sort)
                 .ifPresent(sortingStrategy -> {
-                    if (Arrays.stream(FindEmployeeDTO.class.getFields())
+                    if (Arrays.stream(FindEmployeeDTO.ECriteria.class.getDeclaredFields())
                             .map(Field::getName)
                             .collect(Collectors.toList()).contains(sort.getSortBy())) {
                         if (sort.getType().equals(SortOrder.ASCENDING)) {
