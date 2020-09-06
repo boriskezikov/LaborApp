@@ -1,7 +1,6 @@
 package com.force.labor.service;
 
 
-
 import com.force.labor.domain.Grade;
 import com.force.labor.domain.Priority;
 
@@ -24,12 +23,12 @@ public class TestHelper {
         return random(amount, true, false);
     }
 
-    public static Grade getRandomGrade(){
+    public static Grade getRandomGrade() {
         int pick = new Random().nextInt(Grade.values().length);
         return Grade.values()[pick];
     }
 
-    public static Priority getRandomPriority(){
+    public static Priority getRandomPriority() {
         int pick = new Random().nextInt(Priority.values().length);
         return Priority.values()[pick];
     }

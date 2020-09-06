@@ -4,7 +4,6 @@ import com.force.labor.domain.Employee;
 import com.force.labor.dto.EmployeeDTO;
 import org.mapstruct.Mapper;
 
-
 import java.util.List;
 
 @Mapper

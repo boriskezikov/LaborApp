@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import java.util.List;
 
 @RestController
@@ -22,7 +21,7 @@ public class TestDataController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public List<Task> generate(@RequestParam Integer empl_count, @RequestParam Integer task_count){
+    public List<Task> generate(@RequestParam Integer empl_count, @RequestParam Integer task_count) {
         return testDataHelper.generateEmployees(empl_count, task_count);
     }
 }
