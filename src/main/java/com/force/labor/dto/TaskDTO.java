@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.NonNull;
 
-
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 
@@ -32,7 +31,7 @@ public class TaskDTO {
 
     private Priority priority;
 
-    private LocalDateTime estimatedTime;
+    private Integer estimatedTimeInHours;
 
     private TaskStatus status;
 
@@ -41,5 +40,10 @@ public class TaskDTO {
     private LocalDateTime created;
 
     private BigInteger assignedTo;
+
+    @NonNull
+    private Integer taskCost;
+
+    private Integer doneInPercents;
 
 }

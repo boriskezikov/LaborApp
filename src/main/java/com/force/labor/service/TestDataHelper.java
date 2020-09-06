@@ -1,13 +1,13 @@
 package com.force.labor.service;
 
 import com.force.labor.domain.Employee;
+import com.force.labor.domain.Grade;
 import com.force.labor.domain.Task;
 import com.force.labor.domain.TaskStatus;
 import com.force.labor.repository.EmployeeRepository;
 import com.force.labor.repository.TaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -44,11 +44,21 @@ public class TestDataHelper {
     }
 
     private Employee getRandomEmployee() {
+        Grade grade = TestHelper.getRandomGrade();
+        int salary;
+        if (grade.equals(Grade.JUNIOR)) {
+            salary = TestHelper.getRandomInt(10, 100);
+        } else if (grade.equals(Grade.MIDDLE)) {
+            salary = TestHelper.getRandomInt(100, 500);
+        } else {
+            salary = TestHelper.getRandomInt(500, 1000);
+        }
         return Employee.builder()
                 .firstName(TestHelper.getRandomLetters(10))
                 .lastName(TestHelper.getRandomLetters(12))
                 .passport(TestHelper.getRandomEightDigits())
-                .grade(TestHelper.getRandomGrade())
+                .grade(grade)
+                .salaryPerHour(salary)
                 .build();
     }
 
@@ -60,9 +70,11 @@ public class TestDataHelper {
                 .difficultyLevel(TestHelper.getRandomInt(1, 3))
                 .title(TestHelper.getRandomLetters(10))
                 .status(TaskStatus.OPEN)
-                .estimatedTimeInHours(TestHelper.getRandomInt(1,48))
+                .estimatedTimeInHours(TestHelper.getRandomInt(1, 48))
                 .updated(now)
                 .priority(TestHelper.getRandomPriority())
+                .taskCost(TestHelper.getRandomInt(100, 100000))
+                .doneInPercents(TestHelper.getRandomInt(0, 60))
                 .build();
     }
 }

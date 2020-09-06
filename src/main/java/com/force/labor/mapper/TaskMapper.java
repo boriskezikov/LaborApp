@@ -18,7 +18,7 @@ public interface TaskMapper {
 
     TaskDTO taskToDto(Task origin);
 
-    List<TaskDTO> dtoToTask(List<Task> origin);
+    List<TaskDTO> tasksToDtos(List<Task> origin);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateCustomerFromDto(TaskDTO dto, @MappingTarget Task entity);

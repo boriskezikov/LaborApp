@@ -45,6 +45,9 @@ public class Employee {
     @Enumerated(EnumType.STRING)
     private Grade grade;
 
+    @Column(nullable = false)
+    private Integer salaryPerHour;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Task> tasks;
 

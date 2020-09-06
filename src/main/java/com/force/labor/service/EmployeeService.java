@@ -1,14 +1,14 @@
 package com.force.labor.service;
 
 import com.force.labor.dto.EmployeeDTO;
+import com.force.labor.dto.FindEmployeeDTO;
 import com.force.labor.mapper.EmployeeMapper;
 import com.force.labor.repository.EmployeeRepository;
+import com.force.labor.repository.custom.EmployeeRepositoryCustom;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityExistsException;
-import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -16,6 +16,7 @@ import java.util.List;
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final EmployeeRepositoryCustom employeeRepositoryCustom;
     private final EmployeeMapper employeeMapper = Mappers.getMapper(EmployeeMapper.class);
 
 
@@ -24,9 +25,9 @@ public class EmployeeService {
                 employeeRepository.save(employeeMapper.dtoToEmployee(dto)));
     }
 
-    public EmployeeDTO findById(BigInteger id) {
+    public List<EmployeeDTO> find(FindEmployeeDTO findEmployeeDTO) {
         return employeeMapper.employeeToDto(
-                employeeRepository.findById(id).orElseThrow(EntityExistsException::new));
+                employeeRepositoryCustom.find(findEmployeeDTO.getCriteria(), findEmployeeDTO.getSort()));
     }
 
     public List<EmployeeDTO> findAll() {

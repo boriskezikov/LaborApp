@@ -7,6 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.NonNull;
 
+import javax.swing.SortOrder;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,6 +22,7 @@ public class FindTasksDTO {
 
     @NonNull
     private Criteria criteria;
+    private Sort sort;
 
     @Data
     public static class Criteria{
@@ -26,6 +30,14 @@ public class FindTasksDTO {
         private Priority priority;
         private LocalDateTime createdSince;
         private LocalDateTime createdBefore;
-        private int diff;
+        private Integer estimatedTimeInHours;
+        @Min(0)
+        @Max(100)
+        private Integer doneInPercents;
+        private Integer taskCostGreaterThan;
+        private Integer taskCostLessThan;
+        @Min(0)
+        @Max(10)
+        private Integer difficultyLevel;
     }
 }

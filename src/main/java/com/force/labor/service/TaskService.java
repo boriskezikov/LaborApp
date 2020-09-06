@@ -6,6 +6,7 @@ import com.force.labor.dto.FindTasksDTO;
 import com.force.labor.dto.TaskDTO;
 import com.force.labor.mapper.TaskMapper;
 import com.force.labor.repository.TaskRepository;
+import com.force.labor.repository.custom.TaskRepositoryCustom;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import static java.time.LocalDateTime.now;
 @RequiredArgsConstructor
 public class TaskService {
 
+    private final TaskRepositoryCustom taskRepositoryCustom;
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper = Mappers.getMapper(TaskMapper.class);
 
@@ -32,11 +34,6 @@ public class TaskService {
         taskRepository.save(newTask);
     }
 
-    public List<TaskDTO> findById(FindTasksDTO findTasksDTO) {
-        return taskMapper.dtoToTask(taskRepository
-                .findAllByIdIn(findTasksDTO.getCriteria().getIds()));
-    }
-
     public void updateTask(List<TaskDTO> tasks) {
         tasks.forEach(taskDTO -> taskRepository.findById(taskDTO.getId()).ifPresentOrElse(task -> {
             taskMapper.updateCustomerFromDto(taskDTO, task);
@@ -46,8 +43,13 @@ public class TaskService {
         }));
     }
 
+    public List<TaskDTO> find(FindTasksDTO findTasksDTO) {
+        return taskMapper.tasksToDtos(
+                taskRepositoryCustom.find(findTasksDTO.getCriteria(), findTasksDTO.getSort()));
+    }
+
     public List<TaskDTO> findAll() {
-        return taskMapper.dtoToTask((List<Task>) taskRepository.findAll());
+        return taskMapper.tasksToDtos(taskRepository.findAll());
     }
 
     public void deleteById(BigInteger id) {

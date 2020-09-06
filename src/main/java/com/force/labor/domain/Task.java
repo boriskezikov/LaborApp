@@ -68,6 +68,9 @@ public class Task {
     @Column(nullable = false)
     private LocalDateTime updated;
 
+    @Column(nullable = false)
+    private Integer taskCost;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id", nullable = false)
     private List<Employee> employee;
