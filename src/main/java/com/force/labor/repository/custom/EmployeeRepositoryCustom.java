@@ -29,7 +29,7 @@ public class EmployeeRepositoryCustom {
 
     private final EntityManager entityManager;
 
-    public List<Employee> find(FindEmployeeDTO.Criteria criteria, Sort sort) {
+    public List<Employee> find(FindEmployeeDTO.ECriteria criteria, Sort sort) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Employee> query = criteriaBuilder.createQuery(Employee.class);
         Root<Employee> root = query.from(Employee.class);

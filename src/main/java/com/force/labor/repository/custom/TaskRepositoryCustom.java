@@ -30,7 +30,7 @@ public class TaskRepositoryCustom {
 
     private final EntityManager entityManager;
 
-    public List<Task> find(FindTasksDTO.Criteria criteria, Sort sort) throws EntityNotFoundException {
+    public List<Task> find(FindTasksDTO.TCriteria criteria, Sort sort) throws EntityNotFoundException {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Task> query = criteriaBuilder.createQuery(Task.class);
         Root<Task> root = query.from(Task.class);

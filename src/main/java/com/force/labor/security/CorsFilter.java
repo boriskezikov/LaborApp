@@ -1,7 +1,7 @@
 package com.force.labor.security;
 
-import com.google.common.net.HttpHeaders;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.Filter;

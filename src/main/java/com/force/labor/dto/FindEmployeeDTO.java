@@ -17,11 +17,11 @@ import java.util.List;
 public class FindEmployeeDTO {
 
     @NonNull
-    private Criteria criteria;
+    private ECriteria criteria;
     private Sort sort;
 
     @Data
-    public static class Criteria {
+    public static class ECriteria {
         private List<BigInteger> ids;
         private String firstName;
         private String lastName;

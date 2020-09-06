@@ -21,11 +21,11 @@ import java.util.List;
 public class FindTasksDTO {
 
     @NonNull
-    private Criteria criteria;
+    private TCriteria criteria;
     private Sort sort;
 
     @Data
-    public static class Criteria{
+    public static class TCriteria{
         private List<BigInteger> ids;
         private Priority priority;
         private LocalDateTime createdSince;
