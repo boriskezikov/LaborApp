@@ -1,6 +1,7 @@
 package com.force.labor.repository.custom;
 
 import com.force.labor.domain.Employee;
+import com.force.labor.dto.EmployeeDTO;
 import com.force.labor.dto.FindEmployeeDTO;
 import com.force.labor.dto.Sort;
 import lombok.RequiredArgsConstructor;
@@ -57,7 +58,7 @@ public class EmployeeRepositoryCustom {
 
         ofNullable(sort)
                 .ifPresent(sortingStrategy -> {
-                    if (Arrays.stream(FindEmployeeDTO.ECriteria.class.getDeclaredFields())
+                    if (Arrays.stream(EmployeeDTO.class.getDeclaredFields())
                             .map(Field::getName)
                             .collect(Collectors.toList()).contains(sort.getSortBy())) {
                         if (sort.getType().equals(SortOrder.ASCENDING)) {

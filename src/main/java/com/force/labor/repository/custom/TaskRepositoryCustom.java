@@ -3,6 +3,7 @@ package com.force.labor.repository.custom;
 import com.force.labor.domain.Task;
 import com.force.labor.dto.FindTasksDTO;
 import com.force.labor.dto.Sort;
+import com.force.labor.dto.TaskDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
@@ -60,7 +61,7 @@ public class TaskRepositoryCustom {
                 .ifPresent(option -> predicates.add(criteriaBuilder.lessThan(root.get("taskCost"), option)));
         ofNullable(sort)
                 .ifPresent(sortingStrategy -> {
-                    if (Arrays.stream(FindTasksDTO.TCriteria.class.getDeclaredFields())
+                    if (Arrays.stream(TaskDTO.class.getDeclaredFields())
                             .map(Field::getName)
                             .collect(Collectors.toList()).contains(sort.getSortBy())) {
                         if (sort.getType().equals(SortOrder.ASCENDING)) {
