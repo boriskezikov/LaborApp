@@ -43,6 +43,7 @@ public class Employee {
     private String passport;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Grade grade;
 
     @Column(nullable = false)

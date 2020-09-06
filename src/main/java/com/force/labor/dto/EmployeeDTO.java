@@ -26,4 +26,6 @@ public class EmployeeDTO {
     private String passport;
 
     private Grade grade;
+
+    private Integer salaryPerHour;
 }

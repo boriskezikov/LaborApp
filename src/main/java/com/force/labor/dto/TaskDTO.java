@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TaskDTO {
 
-    @NonNull
     private BigInteger id;
 
     @NonNull
@@ -27,6 +26,7 @@ public class TaskDTO {
 
     private String description;
 
+    @NonNull
     private Integer difficultyLevel;
 
     private Priority priority;

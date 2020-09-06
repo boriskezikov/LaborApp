@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -33,6 +34,10 @@ public class EmployeeService {
     public List<EmployeeDTO> findAll() {
         return employeeMapper.employeeToDto(
                 employeeRepository.findAll());
+    }
+
+    public void deleteById(BigInteger id) {
+        employeeRepository.deleteById(id);
     }
 
 }
