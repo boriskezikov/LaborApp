@@ -44,6 +44,9 @@ public class TaskService {
     }
 
     public List<TaskDTO> find(FindTasksDTO findTasksDTO) {
+        if (findTasksDTO.getCriteria() == null) {
+            return findAll();
+        }
         return taskMapper.tasksToDtos(
                 taskRepositoryCustom.find(findTasksDTO.getCriteria(), findTasksDTO.getSort()));
     }

@@ -38,27 +38,30 @@ public class TaskRepositoryCustom {
 
         List<Predicate> predicates = new ArrayList<>();
 
-        ofNullable(criteria.getIds()).ifPresent(option -> {
-            CriteriaBuilder.In<BigInteger> inClause = criteriaBuilder.in(root.get("id"));
-            option.forEach(inClause::value);
-            predicates.add(inClause);
+        ofNullable(criteria).ifPresent(tcriteria->{
+            ofNullable(tcriteria.getIds()).ifPresent(option -> {
+                CriteriaBuilder.In<BigInteger> inClause = criteriaBuilder.in(root.get("id"));
+                option.forEach(inClause::value);
+                predicates.add(inClause);
+            });
+            ofNullable(tcriteria.getEstimatedTimeInHours())
+                    .ifPresent(option -> predicates.add(criteriaBuilder.greaterThan(root.get("estimatedTimeInHours"), option)));
+            ofNullable(tcriteria.getDoneInPercents())
+                    .ifPresent(option -> predicates.add(criteriaBuilder.greaterThan(root.get("doneInPercents"), option)));
+            ofNullable(tcriteria.getDifficultyLevel())
+                    .ifPresent(option -> predicates.add(criteriaBuilder.greaterThan(root.get("difficultyLevel"), option)));
+            ofNullable(tcriteria.getPriority())
+                    .ifPresent(option -> predicates.add(criteriaBuilder.greaterThan(root.get("priority"), option)));
+            ofNullable(tcriteria.getCreatedSince())
+                    .ifPresent(option -> predicates.add(criteriaBuilder.greaterThan(root.get("created"), option)));
+            ofNullable(tcriteria.getCreatedBefore())
+                    .ifPresent(option -> predicates.add(criteriaBuilder.lessThan(root.get("created"), option)));
+            ofNullable(tcriteria.getTaskCostGreaterThan())
+                    .ifPresent(option -> predicates.add(criteriaBuilder.lessThan(root.get("taskCost"), option)));
+            ofNullable(tcriteria.getTaskCostLessThan())
+                    .ifPresent(option -> predicates.add(criteriaBuilder.lessThan(root.get("taskCost"), option)));
         });
-        ofNullable(criteria.getEstimatedTimeInHours())
-                .ifPresent(option -> predicates.add(criteriaBuilder.greaterThan(root.get("estimatedTimeInHours"), option)));
-        ofNullable(criteria.getDoneInPercents())
-                .ifPresent(option -> predicates.add(criteriaBuilder.greaterThan(root.get("doneInPercents"), option)));
-        ofNullable(criteria.getDifficultyLevel())
-                .ifPresent(option -> predicates.add(criteriaBuilder.greaterThan(root.get("difficultyLevel"), option)));
-        ofNullable(criteria.getPriority())
-                .ifPresent(option -> predicates.add(criteriaBuilder.greaterThan(root.get("priority"), option)));
-        ofNullable(criteria.getCreatedSince())
-                .ifPresent(option -> predicates.add(criteriaBuilder.greaterThan(root.get("created"), option)));
-        ofNullable(criteria.getCreatedBefore())
-                .ifPresent(option -> predicates.add(criteriaBuilder.lessThan(root.get("created"), option)));
-        ofNullable(criteria.getTaskCostGreaterThan())
-                .ifPresent(option -> predicates.add(criteriaBuilder.lessThan(root.get("taskCost"), option)));
-        ofNullable(criteria.getTaskCostLessThan())
-                .ifPresent(option -> predicates.add(criteriaBuilder.lessThan(root.get("taskCost"), option)));
+
         ofNullable(sort)
                 .ifPresent(sortingStrategy -> {
                     if (Arrays.stream(TaskDTO.class.getDeclaredFields())
@@ -74,7 +77,6 @@ public class TaskRepositoryCustom {
                                 "Incorrect sorting strategy passed! Task does not contain field %s", sort.getSortBy()));
                     }
                 });
-
         query.where(predicates.toArray(new Predicate[0]));
         return entityManager.createQuery(query).getResultList();
     }

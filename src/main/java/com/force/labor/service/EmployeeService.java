@@ -27,6 +27,9 @@ public class EmployeeService {
     }
 
     public List<EmployeeDTO> find(FindEmployeeDTO findEmployeeDTO) {
+        if (findEmployeeDTO.getCriteria() == null) {
+            return findAll();
+        }
         return employeeMapper.employeeToDto(
                 employeeRepositoryCustom.find(findEmployeeDTO.getCriteria(), findEmployeeDTO.getSort()));
     }

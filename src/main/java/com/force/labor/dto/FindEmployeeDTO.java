@@ -16,7 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 public class FindEmployeeDTO {
 
-    @NonNull
     private ECriteria criteria;
     private Sort sort;
 

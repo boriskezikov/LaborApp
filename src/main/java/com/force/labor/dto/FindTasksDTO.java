@@ -19,7 +19,6 @@ import java.util.List;
 @NoArgsConstructor
 public class FindTasksDTO {
 
-    @NonNull
     private TCriteria criteria;
     private Sort sort;
 
