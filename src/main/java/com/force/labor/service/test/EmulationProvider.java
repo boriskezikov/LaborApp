@@ -1,11 +1,7 @@
 package com.force.labor.service.test;
 
 import com.force.labor.domain.TaskStatus;
-import com.force.labor.repository.EmployeeRepository;
 import com.force.labor.repository.TaskRepository;
-import com.force.labor.service.AssignmentService;
-import com.force.labor.service.EmployeeService;
-import com.force.labor.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -20,14 +16,10 @@ import java.util.Collections;
 @Slf4j
 public class EmulationProvider {
 
-    private final AssignmentService assignmentService;
-    private final EmployeeService employeeService;
-    private final TaskService taskService;
     private final TaskRepository taskRepository;
-    private final EmployeeRepository employeeRepository;
     private final TestDataHelper testDataHelper;
 
-    @Scheduled(fixedDelay = 1)
+//    @Scheduled(fixedDelay = 1)
     @Transactional
     public void closeTaskJob() {
         taskRepository.findAll().stream()
@@ -46,7 +38,7 @@ public class EmulationProvider {
     }
 
 
-    @Scheduled(fixedDelay = 10000)
+//    @Scheduled(fixedDelay = 10000)
     @Transactional
     public void emulateWorkJob() {
         log.warn("_____________________________________________________________");
