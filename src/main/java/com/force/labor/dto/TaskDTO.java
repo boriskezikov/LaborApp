@@ -11,6 +11,7 @@ import org.springframework.lang.NonNull;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -45,5 +46,7 @@ public class TaskDTO {
     private Integer taskCost;
 
     private Integer doneInPercents;
+
+    private List<BigInteger> employees;
 
 }

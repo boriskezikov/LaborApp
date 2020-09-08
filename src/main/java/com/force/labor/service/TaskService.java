@@ -1,6 +1,7 @@
 package com.force.labor.service;
 
 
+import com.force.labor.domain.Employee;
 import com.force.labor.domain.Task;
 import com.force.labor.dto.FindTasksDTO;
 import com.force.labor.dto.TaskDTO;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.time.Clock.systemUTC;
 import static java.time.LocalDateTime.now;
@@ -47,8 +49,17 @@ public class TaskService {
         if (findTasksDTO.getCriteria() == null) {
             return findAll();
         }
-        return taskMapper.tasksToDtos(
-                taskRepositoryCustom.find(findTasksDTO.getCriteria(), findTasksDTO.getSort()));
+        var tasks = taskRepositoryCustom.find(findTasksDTO.getCriteria(), findTasksDTO.getSort());
+        var dtos = taskMapper.tasksToDtos(tasks);
+        dtos.forEach(taskDTO -> {
+            var listIds = tasks.stream()
+                    .filter(task -> task.getId().equals(taskDTO.getId()))
+                    .findFirst().get()
+                    .getEmployee().stream().map(Employee::getId)
+                    .collect(Collectors.toList());
+            taskDTO.setEmployees(listIds);
+        });
+        return dtos;
     }
 
     public List<TaskDTO> findAll() {
