@@ -46,10 +46,12 @@ public class TaskService {
     }
 
     public List<TaskDTO> find(FindTasksDTO findTasksDTO) {
+        List<Task> tasks;
         if (findTasksDTO.getCriteria() == null) {
-            return findAll();
+            tasks = taskRepository.findAll();
+        } else {
+            tasks = taskRepositoryCustom.find(findTasksDTO.getCriteria(), findTasksDTO.getSort());
         }
-        var tasks = taskRepositoryCustom.find(findTasksDTO.getCriteria(), findTasksDTO.getSort());
         var dtos = taskMapper.tasksToDtos(tasks);
         dtos.forEach(taskDTO -> {
             var listIds = tasks.stream()
