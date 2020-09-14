@@ -1,5 +1,6 @@
 package com.force.labor.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -50,6 +51,7 @@ public class Employee {
     @Column(nullable = false)
     private Integer salaryPerHour;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "tasks_id", nullable = false)
     private List<Task> tasks;

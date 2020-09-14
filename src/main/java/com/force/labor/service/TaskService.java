@@ -45,27 +45,18 @@ public class TaskService {
         }));
     }
 
-    public List<TaskDTO> find(FindTasksDTO findTasksDTO) {
+    public List<Task> find(FindTasksDTO findTasksDTO) {
         List<Task> tasks;
         if (findTasksDTO.getCriteria() == null) {
             tasks = taskRepository.findAll();
         } else {
             tasks = taskRepositoryCustom.find(findTasksDTO.getCriteria(), findTasksDTO.getSort());
         }
-        var dtos = taskMapper.tasksToDtos(tasks);
-        dtos.forEach(taskDTO -> {
-            var listIds = tasks.stream()
-                    .filter(task -> task.getId().equals(taskDTO.getId()))
-                    .findFirst().get()
-                    .getEmployee().stream().map(Employee::getId)
-                    .collect(Collectors.toList());
-            taskDTO.setEmployees(listIds);
-        });
-        return dtos;
+        return tasks;
     }
 
-    public List<TaskDTO> findAll() {
-        return taskMapper.tasksToDtos(taskRepository.findAll());
+    public List<Task> findAll() {
+        return taskRepository.findAll();
     }
 
     public void deleteById(BigInteger id) {

@@ -1,5 +1,6 @@
 package com.force.labor.controller;
 
+import com.force.labor.domain.Task;
 import com.force.labor.dto.FindTasksDTO;
 import com.force.labor.dto.TaskDTO;
 import com.force.labor.service.TaskService;
@@ -42,14 +43,14 @@ public class TaskController {
 
     @PostMapping("/search")
     @ResponseBody
-    public List<TaskDTO> find(@RequestBody @Validated FindTasksDTO dto) {
+    public List<Task> find(@RequestBody @Validated FindTasksDTO dto) {
         return taskService.find(dto);
     }
 
     @GetMapping("/all")
     @ResponseStatus(code = HttpStatus.FOUND)
     @ResponseBody
-    public List<TaskDTO> findAll() {
+    public List<Task> findAll() {
         return taskService.findAll();
     }
 
